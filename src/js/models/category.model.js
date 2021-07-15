@@ -31,15 +31,21 @@ function(oj) {
             //Operating on the Database "I use orientDB"
             this.categoryRow.fetch({
                 success : (coll,data)=>{
-                        console.log(data)
-                        notify(true,data);
+                        console.log(data.result);
+                        var test = Object.entries(data.result).map(val => {
+                            console.log("After format : " + val[1].category_name);
+                            return val[1].category_name;
+                        });
+                        console.log(test);
+                
+                        notify(true,test);
                 },
                 error : (model,xhr,options)=>{
                     notify(false,"Error : " + xhr.textStatus);
                 },
                 headers : {
-                    //'Authorization' : 'Basic cm9vdDpyb290cHdk',
-                    'Authorization' : 'Basic' + btoa('root:rootpwd'),
+                    'Authorization' : 'Basic cm9vdDpyb290cHdk',
+                    //'Authorization' : 'Basic' + btoa('root:rootpwd'),
                     'Content-Type' : 'application/json'
                 }
             });

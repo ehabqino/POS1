@@ -9,13 +9,13 @@
         <div class="oj-flex oj-panel oj-bg-neutral-30" >
             <oj-bind-for-each data="[[dataProvider]]">
               <template>
-                <div class="oj-flex-item oj-panel  oj-bg-danger-30 oj-sm-align-items-center">
-                  <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                <div class="oj-panel oj-bg-danger-30 oj-sm-align-items-center">
+                <oj-button on-oj-action="{{selectCategory}}"> 
+                  <oj-bind-text value="[[$current.data]]" ></oj-bind-text>
+                </oj-button> 
                 </div>
               </template>
-              <template slot="noData">
-                <div class="oj-typography-body-md oj-typography-bold oj-sm-padding-2x-top">No Users to display</div>
-              </template>
+            
             </oj-bind-for-each>
           </div> 
     </div>
