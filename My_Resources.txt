@@ -1,0 +1,7 @@
+ Resources :
+
+https://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html?component=binding&demo=foreach
+
+https://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html?component=panel&demo=paneloverview
+
+https://www.oracle.com/webfolder/technetwork/jet/jsdocs/oj.ojBindForEach.html

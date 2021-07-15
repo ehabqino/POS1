@@ -1,0 +1,23 @@
+<div class="oj-hybrid-padding">
+    
+    <!-- <div class="oj-flex oj-panel oj-bg-neutral-30 oj-sm-align-items-center">
+        <div class="oj-flex-item oj-panel oj-bg-brand-30 ">a</div>
+        <div class="oj-flex-item oj-panel oj-bg-danger-30">b</div>
+    </div> -->
+    <div >
+        
+        <div class="oj-flex oj-panel oj-bg-neutral-30" >
+            <oj-bind-for-each data="[[dataProvider]]">
+              <template>
+                <div class="oj-flex-item oj-panel  oj-bg-danger-30 oj-sm-align-items-center">
+                  <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                </div>
+              </template>
+              <template slot="noData">
+                <div class="oj-typography-body-md oj-typography-bold oj-sm-padding-2x-top">No Users to display</div>
+              </template>
+            </oj-bind-for-each>
+          </div> 
+    </div>
+
+</div>
