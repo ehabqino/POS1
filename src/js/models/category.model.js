@@ -2,7 +2,7 @@ define(['ojs/ojModel'],
 function(oj) {
     class CategoryModel {
         constructor(){
-            serverUrl = "http://127.0.0.1:2480/";
+            this.serverUrl = "http://127.0.0.1:2480/";
         }//end of constructor
 
         initializeModelCollection(endpoint){
@@ -20,6 +20,31 @@ function(oj) {
 
         }//initializeModelCollection
 
+        getCategoryList(notify){
+            //api url for all category
+            let api_url = this.serverUrl + "query/posdatabase/sql/SELECT FROM category";
+            this.initializeModelCollection(api_url);
+
+            // Make Row definition and connect it with Collection Definition
+            this.categoryRow = new this.categoryModelDef({},this.category);
+
+            //Operating on the Database "I use orientDB"
+            this.categoryRow.fetch({
+                success : (coll,data)=>{
+                        console.log(data)
+                        notify(true,data);
+                },
+                error : (model,xhr,options)=>{
+                    notify(false,"Error : " + xhr.textStatus);
+                },
+                headers : {
+                    //'Authorization' : 'Basic cm9vdDpyb290cHdk',
+                    'Authorization' : 'Basic' + btoa('root:rootpwd'),
+                    'Content-Type' : 'application/json'
+                }
+            });
+
+        }//end getCategoryList
 
     }//end class
     return new CategoryModel;
