@@ -16,7 +16,7 @@ define(['ojs/ojcore','knockout','jquery','ojs/ojarraydataprovider','models/categ
 
             self.selectCategory = function(event){
                 //alert("clicked");
-                
+                console.log(event);
             }
             
             
