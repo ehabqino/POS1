@@ -1,35 +1,35 @@
 define(['ojs/ojModel'], 
 function(oj) {
-    class CategoryModel {
+    class ProductsModel {
         constructor(){
             this.serverUrl = "http://127.0.0.1:2480/";
         }//end of constructor
 
         initializeModelCollection(endpoint){
-            this.categoryModelDef = oj.Model.extend({
+            this.productsModelDef = oj.Model.extend({
                 url : endpoint,
                 keyAttributes : "@rid" 
             });
-            this.categoryCollDef = oj.Model.extend({
+            this.productsCollDef = oj.Model.extend({
                 url : endpoint,
                 comparator : "@rid" ,
-                model : this.categoryModelDef
+                model : this.productsModelDef
             });
 
-            this.category = new this.categoryCollDef;
+            this.products = new this.productsCollDef;
 
         }//initializeModelCollection
 
-        getCategoryList(notify){
+        getProductsList(notify){
             //api url for all category
-            let api_url = this.serverUrl + "query/posdatabase/sql/SELECT FROM category";
+            let api_url = this.serverUrl + "query/posdatabase/sql/SELECT FROM products";
             this.initializeModelCollection(api_url);
 
             // Make Row definition and connect it with Collection Definition
-            this.categoryRow = new this.categoryModelDef({},this.category);
+            this.productRow = new this.productsCollDef({},this.products);
 
             //Operating on the Database "I use orientDB"
-            this.categoryRow.fetch({
+            this.productRow.fetch({
                 success : (coll,data)=>{
                         console.log(data.result);
                         // var test = Object.entries(data.result).map(val => {
@@ -53,10 +53,10 @@ function(oj) {
                 }
             });
 
-        }//end getCategoryList
+        }//end getProductsList
 
     }//end class
-    return new CategoryModel;
+    return new ProductsModel;
     
     
 });

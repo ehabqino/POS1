@@ -8,9 +8,14 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['accUtils'],
- function(accUtils) {
+define(['utils/messageBroker','accUtils'],
+ function(MsgBroker,accUtils) {
     function AboutViewModel() {
+      
+      /// Ehab Test Publish Subscribe pattern
+      MsgBroker.subscribe('Group1', data =>{
+        console.log("In About Page : " + data);
+      });
       // Below are a set of the ViewModel methods invoked by the oj-module component.
       // Please reference the oj-module jsDoc for additional information.
 
