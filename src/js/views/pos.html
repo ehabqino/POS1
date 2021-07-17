@@ -21,7 +21,7 @@
        
        <div class="oj-flex oj-panel oj-bg-neutral-30">
          <div class="oj-flex-item oj-panel oj-bg-brand-30" style="width: 20%;">
-        <oj-list-view id="CategoryListView" display="card" data="[[CategoryDataProvider]]">
+        <oj-list-view id="CategoryListView" display="list" data="[[CategoryDataProvider]]">
           <template slot="itemTemplate" data-oj-as="row">
             
               <oj-action-card :id="[[row.data.category_id]]" on-oj-action="[[showContent]]">
@@ -44,7 +44,28 @@
           
       </div>
       <div class="oj-flex-item oj-panel oj-bg-danger-30">
-        <h3>Product</h3>
+        
+        <oj-list-view id="ProductsListView" display="list" data="[[ProductsDataProvider]]">
+         
+          <template slot="itemTemplate" data-oj-as="row">
+            
+              <oj-action-card :id="[[row.data.product_id]]" on-oj-action="[[productSelectionChanged]]">
+                <dl>
+                  <dt style="padding: 1px;">
+                   <span><img :src="[[row.data.product_image]]"></span>
+                  </dt>
+                  <br />
+                  <dd>
+                      <span class="oj-text-color-primary lesson-content">
+                      <oj-bind-text value="[[row.data.product_name]]"></oj-bind-text>
+                  </dd>
+                </dl>
+    
+              </oj-action-card>
+            
+          </template>
+    
+        </oj-list-view>
       </div>
        </div>
 

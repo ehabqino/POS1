@@ -31,7 +31,7 @@ function(oj) {
             //Operating on the Database "I use orientDB"
             this.productRow.fetch({
                 success : (coll,data)=>{
-                        console.log(data.result);
+                        //console.log(data.result);
                         // var test = Object.entries(data.result).map(val => {
                         //     console.log("After format : " + val[1]);
                         //     //console.log("After format : " + val[1].category_name);
