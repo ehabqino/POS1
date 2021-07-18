@@ -1,6 +1,6 @@
 define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydataprovider',
         'models/category.model','models/products.model','ojs/ojbindingprovider','ojs/ojlistview',
-        'ojs/ojlistitemlayout','ojs/ojactioncard','ojs/ojbutton','ojs/ojinputtext','ojs/ojlabel'], 
+        'ojs/ojlistitemlayout','ojs/ojactioncard','ojs/ojbutton','ojs/ojinputtext','ojs/ojlabel','ojs/ojtable'], 
     function(MsgBroker,oj,ko,$,ArrayDataProvider,categoryModel,productsModel) {
         function PosViewModel(){
             self = this;
@@ -22,6 +22,9 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
             self.selectedProductInvoice = ko.observableArray([]);
             self.InvoiceDataProvider = new ArrayDataProvider(self.selectedProductInvoice,{keyAttributes: '@rid'});
             
+            self.invoiceTemp=ko.observableArray([]);
+            self.invoiceTempProduct = new ArrayDataProvider(self.invoiceTemp,{keyAttributes: '@product_id'});
+
             categoryModel.getCategoryList((success,data)=>{
                 //console.log("From View Model :" + data);
                 
@@ -89,8 +92,17 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                     self.selectedProductInvoice(self.allProducts().filter(row => row.product_id == data));
                     self.selectedProductInvoice.valueHasMutated();
                     //console.log("One Product Information : ",self.selectedProductInvoice());
+                
                     //console.log("invoice data provider : ",self.InvoiceDataProvider);
-                    //console.log("invoice data provider : ",self.InvoiceDataProvider.data());
+                    //console.log("invoice data provider : ",self.InvoiceDataProvider.data()[0].product_id);                   
+                    //console.log("inoice temp product : " , self.invoiceTempProduct());
+
+                    self.invoiceTemp().push({"product_id":self.InvoiceDataProvider.data()[0].product_id,
+                                                    "product_name" :self.InvoiceDataProvider.data()[0].product_name ,
+                                                    "product_price" : self.InvoiceDataProvider.data()[0].product_price});
+                    //console.log("Invoice Temporary : ",self.invoiceTemp());
+                    self.invoiceTemp.valueHasMutated();
+
             }); //end MsgBroker
         }
         return PosViewModel;
