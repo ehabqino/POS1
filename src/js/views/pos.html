@@ -10,24 +10,25 @@
             <oj-bind-for-each data="[[selectedData]]">
               <template>
                 <div class="oj-panel oj-bg-danger-30 oj-sm-align-items-center">
-                 <oj-button on-oj-action="[[selectCategory]]" label="[[$current.data]]">  
-                   <oj-bind-text value="[[$current.data]]"></oj-bind-text> 
+                <oj-button on-oj-action="[[selectCategory]]" label="[[$current.data]]">  
+                  <oj-bind-text value="[[$current.data]]"></oj-bind-text> 
                 </oj-button> 
                 </div>
               </template>
             
             </oj-bind-for-each> 
-       </div>  -->
-       
-       <div class="oj-flex oj-panel oj-bg-neutral-30">
-         <div class="oj-flex-item oj-panel oj-bg-brand-30" style="width: 20%;">
+        </div>  -->
+      
+      <div class="oj-flex oj-panel oj-bg-neutral-30">
+        <div class="oj-flex-item oj-panel oj-bg-brand-30" style="width: 20%;">
+          <h3>Category</h3>
         <oj-list-view id="CategoryListView" display="list" data="[[CategoryDataProvider]]">
           <template slot="itemTemplate" data-oj-as="row">
             
-              <oj-action-card :id="[[row.data.category_id]]" on-oj-action="[[showContent]]">
+              <oj-action-card :id="[[row.data.category_id]]" on-oj-action="[[showCategoryProducts]]">
                 <dl>
                   <dt style="padding: 1px;">
-                   <span><img :src="[[row.data.category_image]]"></span>
+                    <span><img :src="[[row.data.category_image]]"></span>
                   </dt>
                   <br />
                   <dd>
@@ -42,17 +43,18 @@
     
         </oj-list-view>
           
-      </div>
+        </div>
       <div class="oj-flex-item oj-panel oj-bg-danger-30">
+        <h3>Products</h3>
         
         <oj-list-view id="ProductsListView" display="list" data="[[ProductsDataProvider]]">
-         
+        
           <template slot="itemTemplate" data-oj-as="row">
             
               <oj-action-card :id="[[row.data.product_id]]" on-oj-action="[[productSelectionChanged]]">
                 <dl>
                   <dt style="padding: 1px;">
-                   <span><img :src="[[row.data.product_image]]"></span>
+                    <span><img :src="[[row.data.product_image]]"></span>
                   </dt>
                   <br />
                   <dd>
@@ -66,9 +68,14 @@
           </template>
     
         </oj-list-view>
+        
       </div>
-       </div>
+      <div class="oj-flex-item oj-panel oj-bg-info-30">
+        <h3>invoice</h3>
+        
+      </div>
+      </div>
 
       <br />
-     
+    
 </div>
