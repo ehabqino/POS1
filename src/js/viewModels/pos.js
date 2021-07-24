@@ -1,6 +1,6 @@
 define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydataprovider',
         'models/category.model','models/products.model','ojs/ojbindingprovider','ojs/ojlistview',
-        'ojs/ojlistitemlayout','ojs/ojactioncard','ojs/ojbutton','ojs/ojinputtext','ojs/ojlabel','ojs/ojtable'], 
+        'ojs/ojlistitemlayout','ojs/ojactioncard','ojs/ojbutton','ojs/ojinputtext','ojs/ojinputnumber','ojs/ojlabel','ojs/ojtable'], 
     function(MsgBroker,oj,ko,$,ArrayDataProvider,categoryModel,productsModel) {
         function PosViewModel(){
             self = this;
@@ -24,6 +24,8 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
             
             self.invoiceTemp=ko.observableArray([]);
             self.invoiceTempProduct = new ArrayDataProvider(self.invoiceTemp,{keyAttributes: '@product_id'});
+            self.quantityVal = ko.observable(1);
+            self.totalInvoice = ko.observable(50);
 
             categoryModel.getCategoryList((success,data)=>{
                 //console.log("From View Model :" + data);
@@ -104,6 +106,12 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                     self.invoiceTemp.valueHasMutated();
 
             }); //end MsgBroker
+
+            self.deleteItem = (event)=> {
+                // Remove Items from the Cart
+               // console.log(event.target.parentElement.parentElement);
+                event.target.parentElement.parentElement.remove();
+            };
         }
         return PosViewModel;
     
