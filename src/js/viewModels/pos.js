@@ -104,8 +104,17 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                                                     "product_price" : self.InvoiceDataProvider.data()[0].product_price});
                     //console.log("Invoice Temporary : ",self.invoiceTemp());
                     self.invoiceTemp.valueHasMutated();
+                    var totalPrice =0;
+                    self.invoiceTemp().forEach(element => {
+                        totalPrice += element.product_price;
+                        //console.log("element : ", element.product_price);
+                        //console.log(totalPrice);
+                    });
+                    //console.log("inoice temp product : " , self.invoiceTemp());
+                    console.log(totalPrice);
 
             }); //end MsgBroker
+            
 
             self.deleteItem = (event)=> {
                 // Remove Items from the Cart
