@@ -124,9 +124,15 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                 //console.log(event.target);
                 //console.log("Current Target Id : ",event.currentTarget.id);
                 
-               // console.log(self.invoiceTemp());
+                console.log(self.invoiceTemp());
                 event.target.parentElement.parentElement.remove();
-                self.updateTotal(event.currentTarget.id);
+                const index =self.invoiceTemp().findIndex(element => element.product_id == event.currentTarget.id);
+                self.invoiceTemp().splice(index,1);
+                self.invoiceTemp.valueHasMutated();
+                console.log(self.invoiceTemp());
+                
+                //console.log(index);
+                //self.updateTotal(event.currentTarget.id);
             };
 
             self.updateTotal =(id)=>{

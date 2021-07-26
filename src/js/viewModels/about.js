@@ -29,15 +29,36 @@ define(['utils/messageBroker','accUtils'],
        */
 
       //// Test on array from Ehab 
-      const inputarray =[1,5,{a:6,b:8,c:9},2,3,2,5,1];
-      const elemettoreplace = {a:6,b:8,c:9} ;
-      //console.log(elemettoreplace.b);
-      const index = inputarray.findIndex(el => el.b == elemettoreplace.b);
-      console.log(inputarray[index].a,inputarray[index].b,inputarray[index].c);
-      console.log(index);
-      const resultarray = [...inputarray.slice(0,index), ...inputarray.slice(index+1)];
-      console.log(resultarray);
+      // const inputarray =[1,5,{a:6,b:8,c:9},2,3,2,5,1];
+      // const elemettoreplace = {a:6,b:8,c:9} ;
+      // //console.log(elemettoreplace.b);
+      // const index = inputarray.findIndex(el => el.b == elemettoreplace.b);
+      // console.log(inputarray[index].a,inputarray[index].b,inputarray[index].c);
+      // console.log(index);
+      // const resultarray = [...inputarray.slice(0,index), ...inputarray.slice(index+1)];
+      // console.log(resultarray);
       
+      //Solution 1 : Remove elemet 
+      this.removeElement1 = (inputArray,elemetRemove) => {
+          const resultArray = [...inputArray];
+          const index = inputArray.findIndex(element => element == elemetRemove );
+          resultArray.splice(index,1);
+          //console.log(resultArray);
+          return resultArray;
+      };// end removeElement1
+      const inputArray = [1,5,6,2,3,2,5,2];
+      console.log(inputArray);
+      newarray1 = this.removeElement1(inputArray,6);
+      console.log(newarray1);
+      
+      //Solution 2 : Remove Element using Filter Method
+      this.removeElement = (inputArray,elementRemove) => {
+        const resultArray = inputArray.filter(element => element !== elementRemove);
+        return resultArray;
+      };// end removeElemet
+      newarray2 = this.removeElement(inputArray,5);
+      console.log(newarray2);
+
 
       this.connected = () => {
         accUtils.announce('About page loaded.', 'assertive');
