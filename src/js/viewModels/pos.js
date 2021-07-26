@@ -25,7 +25,8 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
             self.invoiceTemp=ko.observableArray([]);
             self.invoiceTempProduct = new ArrayDataProvider(self.invoiceTemp,{keyAttributes: '@product_id'});
             self.quantityVal = ko.observable(1);
-            self.totalInvoice = ko.observable(50);
+            self.totalInvoice = ko.observable(0);
+            //self.totalPrice =0;
 
             categoryModel.getCategoryList((success,data)=>{
                 //console.log("From View Model :" + data);
@@ -107,19 +108,50 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                     var totalPrice =0;
                     self.invoiceTemp().forEach(element => {
                         totalPrice += element.product_price;
+                        
                         //console.log("element : ", element.product_price);
                         //console.log(totalPrice);
                     });
+                    self.totalInvoice(totalPrice);
                     //console.log("inoice temp product : " , self.invoiceTemp());
-                    console.log(totalPrice);
+                    //console.log(self.totalInvoice());
 
             }); //end MsgBroker
             
 
             self.deleteItem = (event)=> {
                 // Remove Items from the Cart
-               // console.log(event.target.parentElement.parentElement);
+                //console.log(event.target);
+                //console.log("Current Target Id : ",event.currentTarget.id);
+                
+               // console.log(self.invoiceTemp());
                 event.target.parentElement.parentElement.remove();
+                self.updateTotal(event.currentTarget.id);
+            };
+
+            self.updateTotal =(id)=>{
+                //console.log(self.invoiceTemp());
+                console.log("From update Total function : ",id);
+                console.log("before remove : ", self.invoiceTemp());
+                
+               
+                //console.log(self.invoiceTemp().filter((row)=> row.product_id == id));
+                //self.invoiceTemp = self.invoiceTemp().filter(row => row.product_id == id);
+                //self.invoiceTemp();
+                // total_array =[];
+                // total_array=self.invoiceTemp().filter((row)=> row.product_id == id)
+                // console.log("After Remove : ",self.invoiceTemp()[0]);
+                // console.log(total_array);
+               // self.invoiceTemp.valueHasMutated();
+                //console.log("After Filter : " ,self.invoiceTemp());
+                var totalPrice=0;
+                self.invoiceTemp().filter((row)=> row.product_id == id).forEach(element => {
+                    totalPrice += element.product_price;
+                    
+                    //console.log("element : ", element.product_price);
+                    //console.log(totalPrice);
+                });
+                self.totalInvoice(self.totalInvoice()-totalPrice);
             };
         }
         return PosViewModel;

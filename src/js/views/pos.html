@@ -83,26 +83,32 @@
         "field": "product_id",
         "headerClassName": "oj-sm-only-hide",
         "className": "oj-sm-only-hide",
-        "resizable": "enabled"},
+        "resizable": "enabled"
+        },
+
         {"headerText": "Name", 
         "field": "product_name",
         "resizable": "enabled"},
+
         {"headerText": "Price", 
         "field": "product_price",
         "headerClassName": "oj-sm-only-hide",
         "className": "oj-sm-only-hide",
         "resizable": "enabled",
         "template":"PriceTemplate"},
+
         {"headerText": "Quantity", 
         "headerStyle":"text-align:center;",
         "style": "text-align:center; padding:0px",
         "sortable":"disabled",
         "template":"QunatityTemplate"},
+
         {"headerText": "Total", 
         "headerStyle":"text-align:center;",
         "style": "text-align:center; padding:0px",
         "sortable":"disabled",
         "template":"TotalTemplate"},
+
         {"headerText": "Actions", 
         "headerStyle":"text-align:center;",
         "style": "text-align:center; padding:0px",
@@ -112,13 +118,13 @@
         style="width: 1px; min-width: 100%;"
         class='demo-table-container oj-bg-body'
         >
-        <template slot="actionsTemplate" data-oj-as="cell">
+        <template slot="actionsTemplate" data-oj-as="cell" >
             <oj-button id="editButton" display="icons" chroming="borderless"
                 on-oj-action="">
                     <span slot="startIcon" class="oj-ux-ico-edit"></span>
                         Edit
             </oj-button>
-            <oj-button id="deleteButton" display="icons" chroming="borderless"
+            <oj-button :id=[[cell.item.data.product_id]] display="icons" chroming="borderless"
                 on-oj-action="[[deleteItem]]">
                 <span slot="startIcon" class="oj-ux-ico-trash"></span>
                     Delete

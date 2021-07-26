@@ -27,6 +27,18 @@ define(['utils/messageBroker','accUtils'],
        * and inserted into the DOM and after the View is reconnected
        * after being disconnected.
        */
+
+      //// Test on array from Ehab 
+      const inputarray =[1,5,{a:6,b:8,c:9},2,3,2,5,1];
+      const elemettoreplace = {a:6,b:8,c:9} ;
+      //console.log(elemettoreplace.b);
+      const index = inputarray.findIndex(el => el.b == elemettoreplace.b);
+      console.log(inputarray[index].a,inputarray[index].b,inputarray[index].c);
+      console.log(index);
+      const resultarray = [...inputarray.slice(0,index), ...inputarray.slice(index+1)];
+      console.log(resultarray);
+      
+
       this.connected = () => {
         accUtils.announce('About page loaded.', 'assertive');
         document.title = "About";
