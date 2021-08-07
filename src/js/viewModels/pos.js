@@ -88,7 +88,7 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                                                 
                     //console.log("Invoice Temporary : ",self.invoiceTemp());
                     
-                   // self.invoiceTemp.valueHasMutated();
+                    self.invoiceTemp.valueHasMutated();
                     //console.log("Invoice Temporary : ",self.invoiceTemp());
                     var totalPrice =0;
                     var sum =0;
@@ -105,12 +105,20 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
         //=================================================================
 
             self.deleteItem = (event)=> {
-
-                event.target.parentElement.parentElement.remove();
-                const index =self.invoiceTemp().findIndex(element => element.product_id == event.currentTarget.id);
+                //console.log(event.target.parentElement.parentElement);
+                //$(event.target.parentElement.parentElement).remove();
+                //event.target.parentElement.parentElement.remove();
+                
+                $(this).remove();
+                const index =self.invoiceTemp().findIndex(element => 
+                    element.product_id == event.currentTarget.id);
+                //console.log("index",index);
+               // console.log(typeof self.invoiceTemp()[index].product_price);
+                self.totalInvoice(self.totalInvoice()-self.invoiceTemp()[index].product_price);
                 self.invoiceTemp().splice(index,1);
                 self.invoiceTemp.valueHasMutated();
                 //console.log(self.invoiceTemp());
+                //console.log(self.totalInvoice());
                 
             };
         //=================================================================

@@ -9,6 +9,7 @@ define(['ojs/ojcore','knockout','jquery'],
         click2 = function(){
             $("#mybtn").hide();
         }
+    
         
     }//end TestviewModel
     return TestviewModel;
