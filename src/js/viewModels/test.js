@@ -2,9 +2,15 @@ define(['ojs/ojcore','knockout','jquery'],
     function(oj,ko,$) {
         function TestviewModel(){
 
-            document.write("<h1>Test View Model</h1>")
-
+        click1=function(){
+            $("button").hide();
+            console.log("Click1 Hide Input element");
         }
+        click2 = function(){
+            $("#mybtn").hide();
+        }
+        
+    }//end TestviewModel
     return TestviewModel;
     
 });
