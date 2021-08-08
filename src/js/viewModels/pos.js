@@ -27,7 +27,7 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
             self.quantityVal = ko.observable(1);
             self.totalInvoice = ko.observable(0);
             //self.totalPrice =0;
-
+            
             //=================================================================
 
             categoryModel.getCategoryList((success,data)=>{
@@ -77,15 +77,25 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
             //=================================================================
 
             MsgBroker.subscribe('Product-for-invoice',data => {
-                    //console.log("Products filter by category : " + data);
+                    //console.log("Products filter by product : " + data);
                     self.selectedProductInvoice(self.allProducts().filter(row => row.product_id == data));
                     self.selectedProductInvoice.valueHasMutated();
                     //console.log(self.selectedProductInvoice());
+                    //console.log(self.InvoiceDataProvider.data());
+                    //self.invoiceTemp.push(self.InvoiceDataProvider.data());
+                
+                    //console.log(self.invoiceTemp().length);
+                    for(i=0; i<self.invoiceTemp().length;i++)
+                        if(self.invoiceTemp()[i].product_id == self.InvoiceDataProvider.data()[0].product_id){
+                            self.quantityVal(self.quantityVal()+1) ;
+                            return
+                        }
 
                     self.invoiceTemp().push({"product_id":self.InvoiceDataProvider.data()[0].product_id,
                                                     "product_name" :self.InvoiceDataProvider.data()[0].product_name ,
                                                     "product_price" : self.InvoiceDataProvider.data()[0].product_price});
-                                                
+                    
+                    console.log(self.quantityVal());
                     //console.log("Invoice Temporary : ",self.invoiceTemp());
                     
                     self.invoiceTemp.valueHasMutated();
@@ -108,7 +118,7 @@ define(['utils/messageBroker','ojs/ojcore','knockout','jquery','ojs/ojarraydatap
                 //console.log(event.target.parentElement.parentElement);
                 //$(event.target.parentElement.parentElement).remove();
                 //event.target.parentElement.parentElement.remove();
-                
+                //console.log(event.currentTarget.id);
                 $(this).remove();
                 const index =self.invoiceTemp().findIndex(element => 
                     element.product_id == event.currentTarget.id);

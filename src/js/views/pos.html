@@ -131,8 +131,8 @@
             </oj-button>
 
         </template>
-        <template slot="QunatityTemplate">
-          <oj-input-number 
+        <template slot="QunatityTemplate" data-oj-as="cellquantity">
+          <oj-input-number :id=[[cellquantity.item.data.product_id]]
                               value="{{quantityVal}}" >
           </oj-input-number>
           
