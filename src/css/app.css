@@ -14,3 +14,7 @@
   height: 1px;
   overflow: hidden;
 }
+
+#number {
+  width: 3em;
+}

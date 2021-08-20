@@ -7,7 +7,7 @@ define(['ojs/ojcore','knockout','jquery'],
             console.log("Click1 Hide Input element");
         }
         click2 = function(){
-            $("#mybtn").hide();
+            $("#mybtn").hide() ;
         }
     
         

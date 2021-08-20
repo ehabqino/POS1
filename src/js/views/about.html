@@ -1,11 +1,40 @@
-<!--
- Copyright (c) 2014, 2021, Oracle and/or its affiliates.
- Licensed under The Universal Permissive License (UPL), Version 1.0
- as shown at https://oss.oracle.com/licenses/upl/
- -->
+
 <div class="oj-hybrid-padding">
   <h1>About Content Area</h1>
-  <div>
-      To change the content of this section, you will make edits to the about.html file located in the /js/views folder.
+  <div id="demo-container">
+    <!-- <oj-label for="button1">oj-button element</oj-label>
+    <oj-button id="button1" on-oj-action="[[clickListener1]]">Click me!</oj-button>
+    <br><br>
+    <label for="button2">HTML button element</label>
+    <br>
+    <button id="button2" on-click="[[clickListener2]]">Click me!</button>
+    <br><br> -->
+    <h4>Fruits and Vegetables</h4>
+    <ul>
+      <oj-bind-for-each data="[[categories]]" >
+        <template data-oj-as="category">
+          <oj-bind-text value="[[$current.observableIndex]]"></oj-bind-text>
+          
+              <oj-bind-for-each data="[[category.data.items]]">
+                
+                
+                <template data-oj-as="item">
+                  <li>
+                    <oj-bind-text value="[[category.data.name]]"></oj-bind-text>
+                    <oj-bind-text value="[[$current.observableIndex]]"></oj-bind-text>
+                    <oj-bind-text value="[[$current.data]]"></oj-bind-text>
+                    
+                  </li>
+                </template>
+              </oj-bind-for-each>
+            
+            
+        </template>
+      </oj-bind-for-each>
+    </ul>
+    <button id="button3" on-click="[[clickListener3]]">Click</button>
+    <div style="font-weight:bold;color:#ea5b3f;">
+      <oj-bind-text value="[[message]]"></oj-bind-text>
+    </div>
   </div>
 </div>

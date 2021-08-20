@@ -74,7 +74,8 @@
         <h3>invoice</h3>
         <oj-table id="classesTable" 
         data="[[invoiceTempProduct]]"
-        selection-mode='{"row": "single", "column": "multiple"}'
+        on-selected-changed='{{selectedChangedListener}}'
+        selection-mode='{"row": "single"}'
         dnd='{"reorder": {"columns": "enabled"}}'
         scroll-policy='loadMoreOnScroll'
         scroll-policy-options='{"fetchSize": 10}'
@@ -125,20 +126,27 @@
                         Edit
             </oj-button>
             <oj-button :id=[[cell.item.data.product_id]] display="icons" chroming="borderless"
-                on-oj-action="[[deleteItem]]" >
+                on-oj-action="[[deleteItem]]">
                 <span slot="startIcon" class="oj-ux-ico-trash"></span>
                     Delete
             </oj-button>
 
         </template>
-        <template slot="QunatityTemplate" data-oj-as="cellquantity">
-          <oj-input-number :id=[[cellquantity.item.data.product_id]]
-                              value="{{quantityVal}}" >
-          </oj-input-number>
+        <template slot="QunatityTemplate" data-oj-as="cellq">
+          <!-- <oj-input-number :id=[[cellq.item.data.product_id]]
+                  value="{{quantityVal}}">
+          </oj-input-number> -->
+        <!-- <oj-input-number :id=[[cellq.item.data.product_id]]
+                          value="{{calculate()}}">
+        </oj-input-number>  -->
+        <!-- <oj-input-number class="oj-form-control-max-width-sm" display-options.validator-hint="none"  min='0' value='1' step='1'>
+        </oj-input-number> -->
+        <input type="number" :id="number" name="tentacles" min="0" value="1" >
+        
           
         </template>
-        <template slot="TotalTemplate">
-
+        <template slot="TotalTemplate" data-oj-as="cellT">
+          <oj-label :id=[[cellT.item.data.product_id]] ></oj-label>
         </template>
 
       </oj-table>
@@ -154,5 +162,12 @@
       </div>
 
       <br />
+
+      <oj-messages id="oj-messages-id" messages="[[messagesDataprovider]]" display="notification"
+                        display-options.category="none"
+                        position='{"my":{"vertical" :"top", "horizontal": "end"}, 
+                                    "at": {"vertical": "top", "horizontal": "end"},
+                                    "of": "window"}'>
+       </oj-messages>
     
 </div>

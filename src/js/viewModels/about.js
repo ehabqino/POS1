@@ -8,12 +8,42 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['utils/messageBroker','accUtils'],
- function(MsgBroker,accUtils) {
+define(['utils/messageBroker', 'accUtils', 'knockout', 'ojs/ojbutton', 'ojs/ojlabel', 'ojs/ojknockout'],
+  function (MsgBroker, accUtils, ko) {
     function AboutViewModel() {
-      
+
+      var self = this;
+      this.message = ko.observable("hiiii");
+      self.categories = [
+        { name: "Fruit", items: ["Apple", "Orange", "Banana"] },
+        { name: "Vegetables", items: ["Celery", "Corn", "Spinach"] }
+      ];
+
+      this.clickListener1 = function (event, data, bindingContext) {
+        //data.message('oj-button is clicked');
+
+        self.message('oj-button is clicked');
+        //console.log(data);
+        // const row = event.detail;
+        // console.log(row);
+      };
+
+      this.clickListener2 = function (event, data, bindingContext) {
+        data.message('HTML button is clicked');
+      };
+
+      self.clickListener3 = function (event, data, bindingContext) {
+        var x = event.detail;
+        //console.log(x);
+        //console.log(event.target);
+        //console.log(event.target.tagName);
+        console.log(document.getElementsByTagName("button")[2].attributes[0]);
+        console.log(document.getElementById("button3").attributes[0]);
+
+      };
+
       /// Ehab Test Publish Subscribe pattern
-      MsgBroker.subscribe('Group1', data =>{
+      MsgBroker.subscribe('Group1', data => {
         console.log("In About Page : " + data);
       });
       // Below are a set of the ViewModel methods invoked by the oj-module component.
@@ -37,26 +67,26 @@ define(['utils/messageBroker','accUtils'],
       // console.log(index);
       // const resultarray = [...inputarray.slice(0,index), ...inputarray.slice(index+1)];
       // console.log(resultarray);
-      
+
       //Solution 1 : Remove elemet 
-      this.removeElement1 = (inputArray,elemetRemove) => {
-          const resultArray = [...inputArray];
-          const index = inputArray.findIndex(element => element == elemetRemove );
-          resultArray.splice(index,1);
-          //console.log(resultArray);
-          return resultArray;
+      this.removeElement1 = (inputArray, elemetRemove) => {
+        const resultArray = [...inputArray];
+        const index = inputArray.findIndex(element => element == elemetRemove);
+        resultArray.splice(index, 1);
+        //console.log(resultArray);
+        return resultArray;
       };// end removeElement1
-      const inputArray = [1,5,6,2,3,2,5,2];
+      const inputArray = [1, 5, 6, 2, 3, 2, 5, 2];
       console.log(inputArray);
-      newarray1 = this.removeElement1(inputArray,6);
+      newarray1 = this.removeElement1(inputArray, 6);
       console.log(newarray1);
-      
+
       //Solution 2 : Remove Element using Filter Method
-      this.removeElement = (inputArray,elementRemove) => {
+      this.removeElement = (inputArray, elementRemove) => {
         const resultArray = inputArray.filter(element => element !== elementRemove);
         return resultArray;
       };// end removeElemet
-      newarray2 = this.removeElement(inputArray,5);
+      newarray2 = this.removeElement(inputArray, 5);
       console.log(newarray2);
 
 
